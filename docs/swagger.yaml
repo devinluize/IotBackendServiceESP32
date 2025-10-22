@@ -1,0 +1,1042 @@
+definitions:
+  MenuPayloads.ArticleBodyDetail:
+    properties:
+      article_body_paragraph:
+        type: string
+      article_image_content_path:
+        type: string
+    type: object
+  MenuPayloads.ArticleInsertPayloads:
+    properties:
+      article_body_paragraph:
+        items:
+          $ref: '#/definitions/MenuPayloads.ArticleBodyDetail'
+        type: array
+      article_header:
+        description: ArticleId                int                     `json:"article_id"`
+        type: string
+      article_header_path_content:
+        type: string
+    type: object
+  MenuPayloads.ArticleSelectResponses:
+    properties:
+      article_body_content:
+        items:
+          $ref: '#/definitions/MenuPayloads.ArticleBodyDetail'
+        type: array
+      article_created_by_user_id:
+        type: integer
+      article_date_created:
+        type: string
+      article_header:
+        type: string
+      article_header_image_path:
+        type: string
+      article_id:
+        type: integer
+      is_bookmark:
+        type: boolean
+    type: object
+  MenuPayloads.ArticleUpdatePayloads:
+    properties:
+      article_body_content:
+        items:
+          $ref: '#/definitions/MenuPayloads.ArticleBodyDetail'
+        type: array
+      article_id:
+        type: integer
+    type: object
+  MenuPayloads.CalendarInsertPayload:
+    properties:
+      event_date:
+        type: string
+      event_name:
+        type: string
+      event_time_from:
+        type: string
+      event_time_to:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  MenuPayloads.CalendarUpdatePayload:
+    properties:
+      event_date:
+        type: string
+      event_id:
+        type: integer
+      event_name:
+        type: string
+      event_time_from:
+        type: string
+      event_time_to:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  MenuPayloads.ProfilePayloadRequest:
+    properties:
+      user_email:
+        type: string
+      user_gender:
+        type: string
+      user_height:
+        type: number
+      user_name:
+        type: string
+      user_phone_number:
+        type: string
+      user_profile_description:
+        type: string
+      user_profile_image:
+        type: string
+      user_weight:
+        description: |-
+          UserDetailId           int     `gorm:"column:user_detail_id;primaryKey;not null" json:"user_detail_id"`
+          UserId                 int     `gorm:"column:user_id" json:"user_id"`
+        type: number
+    type: object
+  MenuPayloads.WeightHistoryPayloads:
+    properties:
+      user_bmi:
+        type: number
+      user_weight:
+        description: UserId         int       `gorm:"column:user_id" json:"user_id"`
+        type: number
+      user_weight_time:
+        type: string
+    type: object
+  entities.ArticleBodyEntities:
+    properties:
+      article_body_id:
+        type: integer
+      article_body_paragraph:
+        type: string
+      article_id:
+        type: integer
+      article_image_content_path:
+        type: string
+    type: object
+  entities.ArticleEntities:
+    properties:
+      article_body:
+        items:
+          $ref: '#/definitions/entities.ArticleBodyEntities'
+        type: array
+      article_created_by_user_id:
+        type: integer
+      article_date_created:
+        type: string
+      article_header:
+        type: string
+      article_header_path_content:
+        type: string
+      article_id:
+        type: integer
+    type: object
+  entities.Bookmark:
+    properties:
+      article:
+        $ref: '#/definitions/entities.ArticleEntities'
+      article_id:
+        description: |-
+          BookmarkTypeId int `gorm:"column:bookmark_type_id" json:"bookmark_type_id"`
+          BookmarkType   BookmarkType
+        type: integer
+      bookmark_id:
+        type: integer
+      user:
+        $ref: '#/definitions/entities.Users'
+      user_id:
+        type: integer
+    type: object
+  entities.UserDetail:
+    properties:
+      user_detail_id:
+        type: integer
+      user_gender:
+        type: string
+      user_height:
+        type: number
+      user_id:
+        type: integer
+      user_phone_number:
+        description: UserProfileImage       string  `gorm:"column:user_profile_image"
+          json:"user_profile_image"`
+        type: string
+      user_profile_description:
+        type: string
+      user_weight:
+        type: number
+    type: object
+  entities.Users:
+    properties:
+      user_detail:
+        allOf:
+        - $ref: '#/definitions/entities.UserDetail'
+        description: IsVIP        bool       `gorm:"column:is_vip" json:"is_vip"`
+      user_email:
+        type: string
+      user_id:
+        type: integer
+      user_name:
+        type: string
+      user_password:
+        type: string
+    type: object
+  entities.WeightHistoryEntities:
+    properties:
+      user:
+        $ref: '#/definitions/entities.Users'
+      user_bmi:
+        type: number
+      user_id:
+        type: integer
+      user_weight:
+        type: number
+      user_weight_time:
+        type: string
+      weight_history_id:
+        type: integer
+    type: object
+  payloads.LoginPaylods:
+    properties:
+      user_email:
+        type: string
+      user_password:
+        type: string
+    type: object
+  payloads.RegisterPayloads:
+    properties:
+      user_email:
+        type: string
+      user_gender:
+        type: string
+      user_height:
+        type: number
+      user_name:
+        type: string
+      user_password:
+        type: string
+      user_phone_number:
+        type: string
+      user_weight:
+        type: number
+    type: object
+  responses.ErrorResponses:
+    properties:
+      data: {}
+      message:
+        type: string
+      status_code:
+        type: integer
+      success:
+        type: boolean
+    type: object
+  responses.StandarAPIResponses:
+    properties:
+      data: {}
+      message:
+        type: string
+      status_code:
+        type: integer
+      success:
+        type: boolean
+    type: object
+host: localhost:3000
+info:
+  contact:
+    email: devin@gmail.com
+    name: IoT Blynk Smart Agriculture Backend Service
+    url: IoT
+  description: IoT Blynk Smart Agriculture Backend Service
+  license:
+    name: IoT Blynk Smart Agriculture Backend Service
+  termsOfService: http://swagger.io/terms/
+  title: IoT Blynk Smart Agriculture Backend Service
+  version: "1.0"
+paths:
+  /api/article:
+    get:
+      consumes:
+      - application/json
+      description: Get All Article By Pagination
+      parameters:
+      - description: sort_by
+        in: query
+        name: sort_by
+        type: string
+      - description: sort_of
+        in: query
+        name: sort_of
+        type: string
+      - description: page
+        in: query
+        name: page
+        required: true
+        type: string
+      - description: limit
+        in: query
+        name: limit
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entities.ArticleEntities'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+      security:
+      - BearerAuth: []
+      summary: Get All Article By Pagination
+      tags:
+      - Article
+    patch:
+      consumes:
+      - application/json
+      description: Update Article
+      parameters:
+      - description: Update Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/MenuPayloads.ArticleUpdatePayloads'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+      security:
+      - BearerAuth: []
+      summary: Update Article
+      tags:
+      - Article
+    post:
+      consumes:
+      - application/json
+      description: Create New Article
+      parameters:
+      - description: Insert Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/MenuPayloads.ArticleInsertPayloads'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.StandarAPIResponses'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+      security:
+      - BearerAuth: []
+      summary: Create New Article
+      tags:
+      - Article
+  /api/article/by-id/{article_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get Article By Article
+      parameters:
+      - description: article_id
+        in: path
+        name: article_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.ArticleEntities'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+      security:
+      - BearerAuth: []
+      summary: Get Article By Article
+      tags:
+      - Article
+  /api/article/delete/{article_id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Article
+      parameters:
+      - description: article_id
+        in: path
+        name: article_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.StandarAPIResponses'
+      security:
+      - BearerAuth: []
+      summary: Delete Article
+      tags:
+      - Article
+  /api/article/search:
+    get:
+      consumes:
+      - application/json
+      description: Get All Article By Pagination With Filter
+      parameters:
+      - description: key_filter
+        in: query
+        name: key_filter
+        type: string
+      - description: sort_by
+        in: query
+        name: sort_by
+        type: string
+      - description: sort_of
+        in: query
+        name: sort_of
+        type: string
+      - description: page
+        in: query
+        name: page
+        required: true
+        type: string
+      - description: limit
+        in: query
+        name: limit
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entities.ArticleEntities'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+      security:
+      - BearerAuth: []
+      summary: Get All Article By Pagination With Filter
+      tags:
+      - Article
+  /api/bookmark/{article_id}:
+    delete:
+      consumes:
+      - application/json
+      description: Remove Bookmark
+      parameters:
+      - description: user_id
+        in: query
+        name: user_id
+        required: true
+        type: integer
+      - description: article_id
+        in: query
+        name: article_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.Bookmark'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+      security:
+      - BearerAuth: []
+      summary: Remove Bookmark
+      tags:
+      - Bookmark
+    post:
+      consumes:
+      - application/json
+      description: Add New BookMark
+      parameters:
+      - description: user_id
+        in: query
+        name: user_id
+        required: true
+        type: integer
+      - description: article_id
+        in: query
+        name: article_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.Bookmark'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+      security:
+      - BearerAuth: []
+      summary: Add New BookMark
+      tags:
+      - Bookmark
+  /api/bookmark/{article_type_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get bookmark by Id
+      parameters:
+      - description: user_id
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      - description: article_type_id
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/MenuPayloads.ArticleSelectResponses'
+            type: array
+      security:
+      - BearerAuth: []
+      summary: Get bookmark by Id
+      tags:
+      - Calendar
+  /api/calendar:
+    patch:
+      consumes:
+      - application/json
+      description: Update Calendar
+      parameters:
+      - description: Update Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/MenuPayloads.CalendarUpdatePayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+      security:
+      - BearerAuth: []
+      summary: Update Calendar
+      tags:
+      - Calendar
+    post:
+      consumes:
+      - application/json
+      description: Create New Calendar
+      parameters:
+      - description: Insert Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/MenuPayloads.CalendarInsertPayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.StandarAPIResponses'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+      security:
+      - BearerAuth: []
+      summary: Create New Calendar
+      tags:
+      - Calendar
+  /api/calendar/by-user-id/:
+    get:
+      consumes:
+      - application/json
+      description: Get Calendar by Id
+      parameters:
+      - description: user_id
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.StandarAPIResponses'
+      security:
+      - BearerAuth: []
+      summary: Get Calendar by Id
+      tags:
+      - Calendar
+  /api/calendar/delete/{calendar_id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Calendar by Id
+      parameters:
+      - description: calendar_id
+        in: path
+        name: calendar_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.StandarAPIResponses'
+      security:
+      - BearerAuth: []
+      summary: Delete Calendar by Id
+      tags:
+      - Calendar
+  /api/profile:
+    patch:
+      consumes:
+      - application/json
+      description: Get Profile Detail
+      parameters:
+      - description: user detail Headers
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/MenuPayloads.ProfilePayloadRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+      security:
+      - BearerAuth: []
+      summary: Get Profile Detail
+      tags:
+      - Profile
+    post:
+      consumes:
+      - application/json
+      description: Get Profile Detail
+      parameters:
+      - description: user detail Headers
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/MenuPayloads.ProfilePayloadRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+      security:
+      - BearerAuth: []
+      summary: Get Profile Detail
+      tags:
+      - Profile
+  /api/profile/:
+    get:
+      consumes:
+      - application/json
+      description: Get Profile Detail
+      parameters:
+      - description: user_id
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+      security:
+      - BearerAuth: []
+      summary: Get Profile Detail
+      tags:
+      - Profile
+  /api/user/login2:
+    post:
+      consumes:
+      - application/json
+      description: Login by header
+      parameters:
+      - description: Insert Header Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/payloads.LoginPaylods'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+      security:
+      - BearerAuth: []
+      summary: Login by header
+      tags:
+      - Auth
+  /api/user/register:
+    post:
+      consumes:
+      - application/json
+      description: register by heade
+      parameters:
+      - description: Insert Header Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/payloads.RegisterPayloads'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+      security:
+      - BearerAuth: []
+      summary: register by heade
+      tags:
+      - Auth
+  /api/weight:
+    get:
+      consumes:
+      - application/json
+      description: Get Weight Pagination History
+      parameters:
+      - description: user_id
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      - description: sort_by
+        in: query
+        name: sort_by
+        type: string
+      - description: sort_of
+        in: query
+        name: sort_of
+        type: string
+      - description: page
+        in: query
+        name: page
+        required: true
+        type: string
+      - description: limit
+        in: query
+        name: limit
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entities.WeightHistoryEntities'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+      security:
+      - BearerAuth: []
+      summary: Get Weight Pagination History
+      tags:
+      - Weight
+    post:
+      consumes:
+      - application/json
+      description: Create Weight History
+      parameters:
+      - description: Insert Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/MenuPayloads.WeightHistoryPayloads'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.StandarAPIResponses'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.ErrorResponses'
+      security:
+      - BearerAuth: []
+      summary: Create Weight History
+      tags:
+      - Weight
+  /api/weight/delete/{weight_id}:
+    delete:
+      consumes:
+      - application/json
+      description: Create Weight History
+      parameters:
+      - description: weight_id
+        in: path
+        name: weight_id
+        required: true
+        type: integer
+      - description: user_id
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.StandarAPIResponses'
+      security:
+      - BearerAuth: []
+      summary: Create Weight History
+      tags:
+      - Weight
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
