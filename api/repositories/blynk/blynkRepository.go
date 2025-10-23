@@ -1,7 +1,10 @@
 package blynkrepositoy
 
-import blynkpayloads "IotBackend/api/payloads/blynk"
+import (
+	blynkpayloads "IotBackend/api/payloads/blynk"
+	"gorm.io/gorm"
+)
 
 type BlynkRepository interface {
-	SendDataToBlynk(request blynkpayloads.BlynkDataFromEsp32Request) error
+	SendDataToBlynk(tx *gorm.DB, request blynkpayloads.BlynkDataFromEsp32Request) error
 }

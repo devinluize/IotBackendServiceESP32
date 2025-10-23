@@ -13,26 +13,25 @@ type Configuration struct {
 }
 
 type setupDatabase struct {
-	Hostname      string `mapstructure:"SERVER_HOSTNAME"`
-	Port          int    `mapstructure:"SERVER_PORT"`
-	DBDriver      string `mapstructure:"DB_DRIVER"`
-	DBUser        string `mapstructure:"DB_USER"`
-	DBPass        string `mapstructure:"DB_PASS"`
-	DBName        string `mapstructure:"DB_NAME"`
-	DBHost        string `mapstructure:"DB_HOST"`
-	DBPort        int    `mapstructure:"DB_PORT"`
-	SSHUser       string `mapstructure:"SSH_USER"`
-	SSHPass       string `mapstructure:"SSH_PASS"`
-	SSHHost       string `mapstructure:"SSH_HOST"`
-	SSHPort       int    `mapstructure:"SSH_PORT"`
-	MemoryBackend string `mapstructure:"MEMORY_BACKEND"`
-	MemoryIndex   string `mapstructure:"MEMORY_INDEX"`
-	AccountName   string `mapstructure:"ACCOUNT_NAME"`
-	Issuer        string `mapstructure:"ISSUER"`
-	TempFilePath  string `mapstructure:"TEMP_FILE_PATH"`
-	ClientOrigin  string `mapstructure:"CLIENT_ORIGIN"`
-	GeneralAPI    string `mapstructure:"GENERAL_API"`
-
+	Hostname                 string `mapstructure:"SERVER_HOSTNAME"`
+	Port                     int    `mapstructure:"SERVER_PORT"`
+	DBDriver                 string `mapstructure:"DB_DRIVER"`
+	DBUser                   string `mapstructure:"DB_USER"`
+	DBPass                   string `mapstructure:"DB_PASS"`
+	DBName                   string `mapstructure:"DB_NAME"`
+	DBHost                   string `mapstructure:"DB_HOST"`
+	DBPort                   int    `mapstructure:"DB_PORT"`
+	SSHUser                  string `mapstructure:"SSH_USER"`
+	SSHPass                  string `mapstructure:"SSH_PASS"`
+	SSHHost                  string `mapstructure:"SSH_HOST"`
+	SSHPort                  int    `mapstructure:"SSH_PORT"`
+	MemoryBackend            string `mapstructure:"MEMORY_BACKEND"`
+	MemoryIndex              string `mapstructure:"MEMORY_INDEX"`
+	AccountName              string `mapstructure:"ACCOUNT_NAME"`
+	Issuer                   string `mapstructure:"ISSUER"`
+	TempFilePath             string `mapstructure:"TEMP_FILE_PATH"`
+	ClientOrigin             string `mapstructure:"CLIENT_ORIGIN"`
+	GeneralAPI               string `mapstructure:"GENERAL_API"`
 	BlynkAPIToken            string `mapstructure:"BLYNK_API_TOKEN"`
 	BlynkAPIUrl              string `mapstructure:"BLYNK_API_URL"`
 	DataStreamSoilMoisture   string `mapstructure:"DATA_STREAM_SOIL_MOISTURE"`

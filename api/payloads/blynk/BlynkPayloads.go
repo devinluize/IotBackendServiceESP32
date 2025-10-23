@@ -7,3 +7,7 @@ type BlynkDataFromEsp32Request struct {
 	AirPollution   int     `json:"air_pollution"`
 	Humidity       float64 `json:"humidity"`
 }
+
+type BlynkEsp32Request struct {
+	BlynkEsp32Request string `json:"blynk_esp_32_request"`
+}

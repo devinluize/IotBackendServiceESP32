@@ -5,6 +5,7 @@ import (
 	blynkpayloads "IotBackend/api/payloads/blynk"
 	blynkrepositoy "IotBackend/api/repositories/blynk"
 	"fmt"
+	"gorm.io/gorm"
 	"net/http"
 )
 
@@ -15,7 +16,7 @@ func NewBlynkRepositoryImpl() blynkrepositoy.BlynkRepository {
 	return &BlynkRepositoryImpl{}
 }
 
-func (b *BlynkRepositoryImpl) SendDataToBlynk(request blynkpayloads.BlynkDataFromEsp32Request) error {
+func (b *BlynkRepositoryImpl) SendDataToBlynk(tx *gorm.DB, request blynkpayloads.BlynkDataFromEsp32Request) error {
 	_, err := http.Get(fmt.Sprintf("%supdate?token=%s&pin=%s&value=%f",
 		configenv.EnvConfigs.BlynkAPIUrl,
 		configenv.EnvConfigs.BlynkAPIToken,

@@ -2,7 +2,6 @@ package migrate
 
 import (
 	configenv "IotBackend/api/config"
-	entities "IotBackend/api/entities/Equipment"
 	"fmt"
 	"gorm.io/driver/sqlserver"
 	"gorm.io/gorm"
@@ -15,13 +14,20 @@ import (
 func Migrate() {
 	configenv.InitEnvConfigs(false, "")
 	logEntry := "Auto Migrating to database"
-	dsn := fmt.Sprintf("sqlserver://%s:%s@%s:%d?database=%s&connection+timeout=30&encrypt=disable&trustServerCertificate=false&app name=SqlClient",
-		configenv.EnvConfigs.DBUser,
-		configenv.EnvConfigs.DBPass,
-		configenv.EnvConfigs.DBHost,
-		configenv.EnvConfigs.DBPort,
-		configenv.EnvConfigs.DBName)
-
+	//dsn := fmt.Sprintf("sqlserver://%s:%s@%s:%d?database=%s&connection+timeout=30&encrypt=disable&trustServerCertificate=false&app name=SqlClient",
+	//	configenv.EnvConfigs.DBUser,
+	//	configenv.EnvConfigs.DBPass,
+	//	configenv.EnvConfigs.DBHost,
+	//	configenv.EnvConfigs.DBPort,
+	//	configenv.EnvConfigs.DBName)
+	dsn := fmt.Sprintf(
+		"server=%s\\%s;user id=%s;password=%s;database=%s;encrypt=disable;trustServerCertificate=true",
+		"ISIJKTMTMISN137", // host only
+		"SQLEXPRESS01",    // instance name (no slash in host!)
+		"imsi_dls",
+		"Binus1an",
+		"dacode_season_7",
+	)
 	newLogger := logger.New(
 		log.New(log.Writer(), "\r\n", log.LstdFlags),
 		logger.Config{
@@ -47,11 +53,7 @@ func Migrate() {
 	var tableNames []string
 	db.Raw("SELECT table_name FROM information_schema.tables WHERE table_type = 'BASE TABLE'").Scan(&tableNames)
 	err = db.AutoMigrate(
-		&entities.EquipmentDifficultyEntities{},
-		&entities.EquipmentTypeEntity{},
-		&entities.ForceTypeEntities{},
-		&entities.MuscleGroupEntities{},
-		&entities.EquipmentCourseDataEntity{},
+	//&entities.EquipmentDifficultyEntities{},
 	)
 
 	if err != nil {

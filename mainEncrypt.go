@@ -5,6 +5,7 @@ import (
 	"crypto/cipher"
 	"encoding/base64"
 	"fmt"
+	"strings"
 )
 
 // AES key and IV must both be 16 bytes for AES-128
@@ -47,12 +48,39 @@ func DecryptAESCTR(cipherB64 string) (string, error) {
 	return string(plainText), nil
 }
 
-func main() {
-	// Example usage
-	msg := "hello golang service"
-	encrypted, _ := EncryptAESCTR(msg)
-	fmt.Println("Encrypted (Base64):", encrypted)
+func main2() {
+	//// Example usage
+	//msg := "hello golang service"
+	//encrypted, _ := EncryptAESCTR(msg)
+	//fmt.Println("Encrypted (Base64):", encrypted)
+	//
+	//fmt.Println("Decrypted:", decrypted)
+	key := []byte("ThisIsAESkey1234")
+	iv := []byte("ESP32InitVector1")
 
-	decrypted, _ := DecryptAESCTR(encrypted)
-	fmt.Println("Decrypted:", decrypted)
+	cipherB64 := strings.TrimSpace(`
+iDTzNqD1FZwJCroy0LWEXKIfcKNCju6wKSY0iXylLfujPauLMw4NIdrishQqRW63Pff02Z+jSl4RkeFr4tk0qYoeLpEERLnTLHqRNd+5RXK5ZOJ0ZXQ3oC859aH82uJ1Mwm0uQ==
+`)
+	decrypted, _ := DecryptAESCTR(cipherB64)
+	fmt.Println("Cipher decryptedlength:", len(decrypted)) // should equal plaintext length (≈97)
+	fmt.Println(string(decrypted))
+
+	block, err := aes.NewCipher(key)
+	if err != nil {
+		panic(err)
+	}
+
+	cipherData, err := base64.StdEncoding.DecodeString(cipherB64)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("Cipher length:", len(cipherData)) // should equal plaintext length (≈97)
+
+	stream := cipher.NewCTR(block, iv)
+	plain := make([]byte, len(cipherData))
+	stream.XORKeyStream(plain, cipherData)
+
+	fmt.Println("Decrypted text:")
+	fmt.Println(string(plain))
 }
