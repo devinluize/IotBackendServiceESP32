@@ -21,15 +21,6 @@ func ReadFromRequestBody(request *http.Request, result interface{}) *responses.E
 	return nil
 }
 
-func WriteToResponseBody(writer http.ResponseWriter, response interface{}) error {
-	writer.Header().Add("Content-Type", "application/json")
-	encoder := json.NewEncoder(writer)
-	err := encoder.Encode(response)
-	if err != nil {
-		return err
-	}
-	return nil
-}
 func ReturnStandarResponses(writer http.ResponseWriter, status bool, message string, data interface{}) {
 	writer.Header().Add("Content-Type", "application/json")
 	encoder := json.NewEncoder(writer)
