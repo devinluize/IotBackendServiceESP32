@@ -2,11 +2,14 @@ package blynkrepositoryimpl
 
 import (
 	configenv "IotBackend/api/config"
+	"IotBackend/api/entity"
 	blynkpayloads "IotBackend/api/payloads/blynk"
 	blynkrepositoy "IotBackend/api/repositories/blynk"
 	"fmt"
-	"gorm.io/gorm"
 	"net/http"
+	"time"
+
+	"gorm.io/gorm"
 )
 
 type BlynkRepositoryImpl struct {
@@ -65,5 +68,14 @@ func (b *BlynkRepositoryImpl) SendDataToBlynk(tx *gorm.DB, request blynkpayloads
 		return err
 	}
 
+	blynkData := entity.BlynkData{
+		SoilMoisture:   request.SoilMoisture,
+		LightIntensity: request.LightIntensity,
+		Temperature:    request.Temperature,
+		AirPollution:   request.AirPollution,
+		Humidity:       request.Humidity,
+		CreateAt:       time.Now(),
+	}
+	tx.Create(&blynkData)
 	return nil
 }

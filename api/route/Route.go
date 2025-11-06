@@ -5,11 +5,12 @@ import (
 	blynkrepositoryimpl "IotBackend/api/repositories/blynk/blynk-repository-impl"
 	"IotBackend/api/service/blynk/BlynkServiceImpl"
 	_ "IotBackend/docs"
+	"net/http"
+
 	"github.com/cloudinary/cloudinary-go/v2"
 	"github.com/go-chi/chi/v5"
 	httpSwagger "github.com/swaggo/http-swagger/v2"
 	"gorm.io/gorm"
-	"net/http"
 )
 
 func StartRouting(db *gorm.DB, cld *cloudinary.Cloudinary) {
@@ -19,7 +20,7 @@ func StartRouting(db *gorm.DB, cld *cloudinary.Cloudinary) {
 	r.Get("/swagger/*", httpSwagger.Handler(
 		httpSwagger.URL(swaggerURL),
 	))
-	http.ListenAndServe(":3000", r)
+	http.ListenAndServe("192.168.68.54:3000", r)
 
 }
 func versionedRouterV1(db *gorm.DB, cld *cloudinary.Cloudinary) chi.Router {
